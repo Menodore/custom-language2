@@ -1,5 +1,3 @@
-// #include <stdio.h>
-// #include "global.h"
 
 void next()
 {
@@ -30,7 +28,6 @@ void next()
         }
       }
     }
-    // printf("%c\n",(char)token);
     else if (token == ' ' || token == '\t')
     {
       continue;
@@ -50,39 +47,33 @@ void next()
         src++;
       }
 
-      // check symbol table to see if variable already exists
+      //checking symbol table to avoid repetition
       cur = symtab;
       while (cur != NULL)
       {
-        if (!check(cur->name,last_pos,(int)(src-last_pos)))
+        if (!check(cur->name,last_pos,(int)(src-last_pos))) //variable existing
         {
-          // varible exists
-
           token = cur->tok;
           return;
         }
         cur=cur->next;
       }
 
-      // search in current scope
-      if (scope != &symtab)
+      if (scope != &symtab) //current scope ie. line
       {
         cur = *scope;
         while (cur != NULL)
         {
           if (!check(cur->name,last_pos,(int)(src-last_pos)))
           {
-            // varible exists
-
             token = cur->tok;
             return;
           }
           cur=cur->next;
         }
       }
-      // varible does not exist. So create new symtab entry
-      char* name = (char*)calloc(src-last_pos+1,1);
-      memcpy(name,last_pos,src-last_pos);
+      char* name = (char*)calloc(src-last_pos+1,1); //non existant variable - new symbol table(symtab) entry
+       memcpy(name,last_pos,src-last_pos);
       cur = newsym();
       cur->name = name;
       cur->hash = hash;
@@ -95,7 +86,6 @@ void next()
       token_val = token-'0';
       if (token == '0' && (*src == 'x' || *src == 'X'))
       {
-        // hex no.
         token=*(++src);
         while (((token >='0') && (token<='9')) || ((token >='a') && (token<='f')) || ((token >='A') && (token<='F')))
         {
@@ -134,9 +124,8 @@ void next()
     }
     else if (token == '/')
     {
-      if (*src=='/')
+      if (*src=='/') //comment
       {
-        // comment
         while (*src !=0 && *src != '\n')
           src++;
       }
@@ -172,59 +161,51 @@ void next()
       return;
     }
     else if (token == '+')
-    {
-      // + or ++
+    { // also for ++
       if (*src == '+') {token = Inc; src++;}
       else token = Add;
       return;
     }
     else if (token == '-')
-    {
-      // - or --
+    {// also for --
       if (*src == '-') {token = Dec; src++;}
       else token = Sub;
       return;
     }
     else if (token == '!')
     {
-      // ! or !=
-      if (*src == '=') {token = Ne; src++;}
+      if (*src == '=') {token = Ne; src++;} //!=
       else token = No;
       return;
     }
     else if (token == '|')
     {
-      // | or ||
-      if (*src == '|') {token = Lor; src++;}
+      if (*src == '|') {token = Lor; src++;} // || - handle or symbol
       else token = Or;
       return;
     }
     else if (token == '&')
     {
-      // & or &&
-      if (*src == '&') {token = Lan; src++;}
+      if (*src == '&') {token = Lan; src++;} // && - handle and symbol
       else token = And;
       return;
     }
     else if (token == '=')
     {
-      // = or ==
-      if (*src == '=') {token = Eq; src++;}
+      if (*src == '=') {token = Eq; src++;} // == - handle equality symbol
       else token = Assign;
       return;
     }
     else if (token == '<')
     {
-      // < or <= or <<
-      if (*src == '<') {token = Shl; src++;}
+      if (*src == '<') {token = Shl; src++;} // << - handle shift symbol
       else if (*src == '=') {token = Le; src++;}
       else token = Lt;
       return;
     }
     else if (token == '>')
     {
-      // > or >= or >>
-      if (*src == '>') {token = Shr; src++;}
+      if (*src == '>') {token = Shr; src++;} // >> - handle shift symbol
       else if (*src == '=') {token = Ge; src++;}
       else token = Gt;
       return;
@@ -237,7 +218,7 @@ void next()
       printf("invalid symbol %d",(char)token);
     }
   }
-  // printf("Token = %s\n", tokname[token]);
+
   return;
 }
-//void get_token()
+//void get_token() - do in main.c

@@ -1,5 +1,4 @@
-// #include <unistd.h>
-// #include "global.h"
+
 #include "operations.h"
 
 
@@ -10,29 +9,17 @@ void eval()
   while(1)
   {
     op = *pc;++pc;
-    // printf("%p\n",op);
-    // Register Movement
-    // if (op == IMM) {ax=*pc++;}
-    // else if (op == LI) {ax = *(long *)(ax);}
-    // else if (op == LC) {ax = *(char *)(ax);}
-    // else if (op == SI) {ax = *(long *)*sp++ = ax;}
-    // else if (op == SC) {ax = *(char *)*sp++ = ax;}
-
-    // Control Flow
-    // else if (op == PUSH) {*--sp = ax;}
+    /* Limited operations possible due to constraints*/
+    //Flow control
      if (op == JMP) {pc = (long *)(*pc);}
     else if (op == JZ) {pc = (ax.data!=0) ? (long*)(pc+1) : (long*)*((long*)pc);}
     else if (op == JNZ) {pc = (ax.data!=0) ? (long*)*((long*)pc) : (long*)(pc+1) ;}
-    //
-    // // Function Call Releated
-    else if (op == CALL) {op_call();}
-    // else if (op == ENT) {*(--sp)=(long)bp; bp=sp; sp-=*pc++;}
-    // else if (op == ADJ) {sp+=*pc++;}
-    // else if (op == LEV) {bp=sp; bp=(long *)*sp++; pc=(long *)*sp++;}
-    // else if (op == LEA) {ax=(long)*(bp+*pc++);}
-    else if (op == RET) {op_ret();}
+  
+    else if (op == CALL) {op_call();} //function calls - not working yet
+   
+    else if (op == RET) {op_ret();} // working
 
-    // Math
+    //Math operatpers - defined in operations.h
     else if (op == OR){ op_or(); }
     else if (op == XOR){ op_xor(); }
     else if (op == AND){ op_and(); }
@@ -52,9 +39,8 @@ void eval()
     else if (op == GETELEM){ op_getelem(); }
     else if (op == SETELEM){ op_setelem(); }
     else if (op == ADDELEM){ op_addelem(); }
-    //
-    // // Built-in's OR syscalls
-    else if (op == EXIT)//{return;}
+    
+    else if (op == EXIT) // return; / exit; / break; 
     {
       if (opreq)
       {
@@ -64,15 +50,7 @@ void eval()
       }
       return;
     }
-    // else if (op == OPEN) {ax = open((char*)sp[1],sp[0]);}
-    // else if (op == READ) {ax = read(sp[2],(char*)sp[1],*sp);}
-    // else if (op == CLOSE) {ax = close(*sp);}
-    // else if (op == PRTF) {tmp = sp+pc[1]; printf((char*)tmp[-1],tmp[-2],tmp[-3],tmp[-4],tmp[-5]);}
-    // else if (op == MALC) {ax = (long)malloc(*sp);}
-    // else if (op == MSET) {ax = (long)memset((char*)sp[2], sp[1], sp[0]);}
-    // else if (op == MCMP) {ax = memcmp((char*)sp[2], (char*)sp[1], *sp);}
-    // else {printf("Unknown Instruction: %ld", op);}
-
+   /* unable to add open and closing operators as defined in enum so using vm*/
     else if (op == IMM)
     {
       ax.type = (long)*pc++;
