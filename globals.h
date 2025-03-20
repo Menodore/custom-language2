@@ -2,6 +2,9 @@
 #define GLOBALS_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <string.h>
 
 #define int long long // to work with 64bit address
 
