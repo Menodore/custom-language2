@@ -1,8 +1,5 @@
-// #include <stdarg.h>
-// #include "global.h"
-// #include "tokens.h"
-#include <stdarg.h>
-// #include <string.h>
+
+#include <stdarg.h> //to parse arguments from virtual machine running on terminal
 #include "virtual.h"
 
 
@@ -19,22 +16,6 @@ void expression(int);
 
 long basetype;
 
-// void ps()
-// {
-//   st* tmp=symtab;
-//   while(tmp!=NULL)
-//   {
-//     printf("%s\n",tmp->name );
-//     tmp=tmp->next;
-//   }
-// }
-
-// void emit(long op)
-// {
-//   ++text;
-//   *text=op;
-// }
-
 void emit(int size, ...)
 {
   va_list ap;
@@ -43,18 +24,14 @@ void emit(int size, ...)
   {
     ++text;
     *text=va_arg(ap, long);
-    // if(!i)
-    // printf("%s ",a1[*text]);
-    // else
-    // printf("%d, ",*text);
+  
   }
-  // puts("");
   va_end(ap);
 }
 
 void match(long tk)
 {
-  if (token == tk) {next();} //printf("Token = %d\n", token);
+  if (token == tk) {next();} 
   else
   {
     if (tk <128)
@@ -83,7 +60,6 @@ void program()
     }
     orig=text+1;
     long* itext=text;
-    // text=text;
     old_text += 1;
     if (!(old_src=src=(char*)malloc(poolsize)))
     {
@@ -91,22 +67,17 @@ void program()
     }
     char* isrc=src;
     opreq =1;
-    // printf("%p=%p\n",text,itext );
-    // printf("%p=%p\n",src,isrc );
+
     memset(text,0,poolsize);
     memset(src,0,poolsize);
     printf("\x1B[32mIn [%ld]: \x1B[37m",line+1);
-    // printf("ghci> ");
+  
     get_inp(src, poolsize-1);
     next();
     global_declaration();
-    // puts("ASAASSASAASSA");
     emit(1,EXIT);
-    // disas(orig);
-    eval();
+    eval(); //evaluate here instead of doing it in main.c
     puts("");
-    // printf("%p=%p\n",itext,isrc );
-    // next();
     free(itext);
     free(isrc);
   }
@@ -122,7 +93,7 @@ void expression(int level)
   st* temp=NULL;
   int isArrRef=0;
 
-  /* Parse Integers */
+  //parsing integers
   if (token == Num)
   {
     emit(3, IMM, INT, token_val);
@@ -130,7 +101,7 @@ void expression(int level)
     expr_type = INT;
   }
 
-  /* Parse identifiers */
+  //parsing identifiers
   else if(token == Id)
   {
     temp = cur;
@@ -146,20 +117,7 @@ void expression(int level)
       if (token == '(')
       {
         match('(');
-        // func* tmp = (func*)cur->value->data;
-        // st* iter = tmp->param;
-        // while (iter!=NULL)
-        // {
-        //   emit(3,IMM, PTR, iter);
-        //   emit(1,PUSH);
-        //
-        //   expression(Assign);
-        //   emit(1,SET);
-        //
-        //   if (token == ',') match(',');
-        //
-        //   iter = iter->next;
-        // }
+        //would be added later to store the values in stk
         match(')');
         emit(2,CALL,temp->value->data);
       }
@@ -171,7 +129,7 @@ void expression(int level)
     }
   }
 
-  /* Parse strings */
+  //parse strings
   else if(token == '"')
   {
     str* s = (str*)calloc(sizeof(str)+(size_t)(data-token_val+1),1);
@@ -182,7 +140,7 @@ void expression(int level)
     match('"');
   }
 
-  /* Parse List */
+  //parse lists
   if(token == Brak)
   {
     if (temp!=NULL)
@@ -197,7 +155,7 @@ void expression(int level)
     }
     else
     {
-      /* List declaration */
+      //declare lists - declaration.h
       match(Brak);
 
       list* lst = (list*)calloc(sizeof(list),1);
@@ -217,7 +175,6 @@ void expression(int level)
     }
   }
 
-  // else {puts("");puts("\t\tInvalid Syntax");}
 
   while (token >= level)
   {
@@ -305,24 +262,7 @@ void expression(int level)
       expression(Inc);
       emit(1,DIV);
     }
-    // else if (token == Brak)
-    // {
-    //   if (temp!=NULL)
-    //   {
-    //     /* Array reference */
-    //     *text=PUSH;
-    //     match(Brak);
-    //     expression(Assign);
-    //     emit(1,GETELEM);
-    //     match(']');
-    //     isArrRef = 1;
-    //   }
-    //   else
-    //   {
-    //     /* List declaration */
-    //   }
-    // }
-
+    
   }
 }
 
@@ -384,12 +324,11 @@ void statement()
 
     long* save = text;
     text = tmp->code;
-    // scope = tmp->param;
     scope = &tmp->head;
 
     match(Id);
     match('(');
-    // parameters();
+    // parameters.c - use void paramaters();
 
     match(')');
     statement();

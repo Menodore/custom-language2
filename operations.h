@@ -1,4 +1,3 @@
-//#include "globals.h"
 
 void op_add(){
     val *temp = sp;
@@ -15,7 +14,7 @@ void op_add(){
   void op_sub() {
     val *temp = sp;
     if (ax.type != sp->type) {
-      puts("ADD: Different types of operands");
+      puts("SUB: Different types of operands");
       exit(-1);
     }
     if (ax.type == INT) {
@@ -27,7 +26,7 @@ void op_add(){
   void op_mul() {
     val *temp = sp;
     if (ax.type != sp->type) {
-      puts("ADD: Different types of operands");
+      puts("MUL: Different types of operands");
       exit(-1);
     }
     if (ax.type == INT) {
@@ -39,7 +38,7 @@ void op_add(){
   void op_div() {
     val *temp = sp;
     if (ax.type != sp->type) {
-      puts("ADD: Different types of operands");
+      puts("DIV: Different types of operands");
       exit(-1);
     }
     if (ax.type == INT) {
@@ -51,7 +50,7 @@ void op_add(){
   void op_mod() {
     val *temp = sp;
     if (ax.type != sp->type) {
-      puts("ADD: Different types of operands");
+      puts("MOD: Different types of operands");
       exit(-1);
     }
     if (ax.type == INT) {
@@ -228,12 +227,7 @@ void op_add(){
     }
   }
   
-  void op_setelem() {
-    /*  a[i] = b
-        sp[0] = i
-        sp[1] = a
-        ax = b    */
-  
+  void op_setelem() {  
     val *tmp = sp;
     if (tmp->type != INT) {
       puts("Invalid index");
@@ -246,7 +240,7 @@ void op_add(){
     st *ptr = (st *)tmp->data;
     val *v = (val *)ptr->value;
   
-    /* String */
+    //for strings
     if (v->type == STR) {
       str *elem = (str *)v->data;
       if (idx >= elem->size || idx < 0) {
@@ -256,7 +250,7 @@ void op_add(){
       elem->data[idx] = (char)ax.data;
       sp++;
     }
-    /* List */
+    //create list
     else if (v->type == LIST) {
       list *elem = (list *)v->data;
       if (idx >= elem->size || idx < 0) {

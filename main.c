@@ -8,12 +8,9 @@
 #include "globals.h"
 #include "token.h"
 #include "parser.h"
-// #include "vm.h"
+// #include "virtual.h" // conflicts created
 
-// void expression()
-// {
-//   return;
-// }
+// void expression();
 
 
 void initialise(int argc, char const *argv[])
@@ -95,14 +92,7 @@ void initialise(int argc, char const *argv[])
     cur->tok = i;
     i++;
   }
-  // i=EXIT;
-  // while (i<=MCMP)
-  // {
-  //   next();
-  //   cur->class = Sys;
-  //   cur->value = i++;
-  //   // cur->type = Int;
-  // }
+ 
   src=tmp;
 
   setvbuf(stdout, NULL, _IONBF, 0);
@@ -115,11 +105,8 @@ int main(int argc, char const *argv[])
 {
 
   initialise(argc,argv);
-  // puts(src);
   program();
-  // emit(EXIT);
-  // puts("");
-  // eval();
+  // eval(); // eval() is not implemented
 
   return 0;
 }
