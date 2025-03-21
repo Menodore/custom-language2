@@ -11,6 +11,12 @@ make
 
 ---
 
+## Resources Used
+
+1. https://github.com/rswier/c4
+2. https://github.com/lotabout/write-a-C-interpreter?tab=readme-ov-file
+
+---
 ## Features  
 - Uses a **recursive-descent parser**  
 - Converts code to **bytecode** and executes it  
