@@ -138,4 +138,21 @@ The interpreter operates using two stacks:
 |---------|------------|
 | `EXIT`  | Terminate the program execution. |
 
+---
+# Grammar
+1. program → statement  
+2. statement → { statement } | if | while | func | return | expression  
+3. if → "if" '(' expression ')' statement else 
+4. else → ε | "else" statement  
+5. while → "while" '(' expression ')' statement  
+6. func → "func" id '(' ')' statement  
+7. expression → var | math_op  
+8. var → id "=" type  
+9. type → list | string | num | id  
+10. list → '[' list_entry ']'  
+11. list_entry → type | type ',' list_entry  
+12. string → *    
+13. num → [0-9]*  
+14. id → [a-zA-Z0-9_]*
+
 
