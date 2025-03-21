@@ -47,7 +47,7 @@ void op_add(){
     sp++;
   }
   
-  void op_mod() {
+  void op_mod() { // not working 
     val *temp = sp;
     if (ax.type != sp->type) {
       puts("MOD: Different types of operands");
