@@ -25,14 +25,13 @@ typedef struct val {
 ---
 
 ## 🛠️ Supported Types
-Type Code	Type Name	        Description
-0	        **None Type**	    Default type
-1	        **Integer Type**	Stores integer values
-2	        **String Type**  	Stores string values
-3	        **List Type**    	Represents lists
-4	        **Pointer Type**	Stores memory addresses
-5	        **Function Type**	Represents functions
-For more details, see globals.h.
+-	**None Type**:Default type
+-**Integer Type**:Stores integer values
+-**String Type**:Stores string value
+-**List Type**:Represents lists
+-**Pointer Type**:Stores memory addresses
+-**Function Type**:Represents functions
+For more details, see `globals.h`.
 
 ---
 
@@ -42,13 +41,11 @@ As described in virtual.h
 ### Stack
 The interpreter operates using two stacks:
 
-**Stack Type**	         **Purpose**
-**Operations Stack**	   Used for all VM operations, stores operands of type val
-**Call Stack	Stores**   return addresses and manages function scopes
+1. **Operations Stack**	:  Used for all VM operations, stores operands of type val
+2. **Call Stack	Stores** : return addresses and manages function scopes
 
 ### Registers
-**Register**	**Purpose**
-`sp`	        Stack top pointer
-`ax`	        Auxiliary register (val type)
-`cs_sp`	      Call stack top pointer
-`cs_bp`	      Call stack base pointer
+1.`sp`: Stack top pointer
+2.`ax`:Auxiliary register (val type)
+3.`cs_sp`:Call stack top pointer
+4.`cs_bp`:Call stack base pointer
