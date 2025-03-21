@@ -15,6 +15,8 @@ make
 
 1. https://github.com/rswier/c4
 2. https://github.com/lotabout/write-a-C-interpreter
+3. https://github.com/tlaceby/guide-to-interpreters-series
+
 
 ---
 ## Features  
