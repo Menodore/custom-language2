@@ -1,6 +1,16 @@
 # customC-Interpreter 
 *A C Interpreter written in C with a recursive-descent parser that converts code to bytecode for execution.*
 
+## How to run?
+1. Compile using `make`
+2. Run using `./main`
+```
+make
+./main
+```
+
+---
+
 ## Features  
 - Uses a **recursive-descent parser**  
 - Converts code to **bytecode** and executes it  
