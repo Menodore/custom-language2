@@ -14,7 +14,7 @@ make
 ## Resources Used
 
 1. https://github.com/rswier/c4
-2. https://github.com/lotabout/write-a-C-interpreter?tab=readme-ov-file
+2. https://github.com/lotabout/write-a-C-interpreter
 
 ---
 ## Features  
