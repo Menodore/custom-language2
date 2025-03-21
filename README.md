@@ -77,7 +77,6 @@ The interpreter operates using two stacks:
 ### **Control Flow Instructions**
 | Opcode  | Description |
 |---------|------------|
-| `LEA`   | Load effective address (not implemented). |
 | `IMM`   | Load an immediate value into the `ax` register. |
 | `JMP`   | Jump to the specified address. |
 | `CALL`  | Call a function (push current instruction pointer onto the call stack and jump to function). |
@@ -91,14 +90,6 @@ The interpreter operates using two stacks:
 | `ADJ`   | Adjust the stack pointer for local variables. |
 | `LEV`   | Leave function scope and return to caller. |
 
-### **Memory Load/Store Instructions**
-| Opcode  | Description |
-|---------|------------|
-| `LI`    | Load an integer from memory into `ax` (not implemented). |
-| `LC`    | Load a character from memory into `ax` (not implemented). |
-| `SI`    | Store an integer from `ax` into memory (not implemented). |
-| `SC`    | Store a character from `ax` into memory (not implemented). |
-| `PUSH`  | Push `ax` onto the stack. |
 
 ### **Logical & Comparison Instructions**
 | Opcode  | Description |
@@ -124,16 +115,6 @@ The interpreter operates using two stacks:
 | `DIV`   | Division (`ax = stack_top / ax`). |
 | `MOD`   | Modulo (`ax = stack_top % ax`). |
 
-### **File & Memory Management Instructions**
-| Opcode  | Description |
-|---------|------------|
-| `OPEN`  | Open a file (not implemented). |
-| `READ`  | Read from a file (not implemented). |
-| `CLOS`  | Close a file (not implemented). |
-| `PRTF`  | Print formatted output (not implemented). |
-| `MALC`  | Allocate memory dynamically (not implemented). |
-| `MSET`  | Set memory (not implemented). |
-| `MCMP`  | Compare memory (not implemented). |
 
 ### **Exit Instruction**
 | Opcode  | Description |
