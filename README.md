@@ -94,7 +94,7 @@ The interpreter operates using two stacks:
 ### **Logical & Comparison Instructions**
 | Opcode  | Description |
 |---------|------------|
-| `OR`    | Bitwise OR (`ax = stack_top | ax `). |
+| `OR`    | Bitwise OR (`ax = stack_top || ax `). |
 | `XOR`   | Bitwise XOR (`ax = stack_top ^ ax`). |
 | `AND`   | Bitwise AND (`ax = stack_top & ax`). |
 | `EQ`    | Check if equal (`ax = (stack_top == ax)`). |
