@@ -41,14 +41,26 @@ typedef struct val {
 `data`: Stores the actual value (directly for integers, as a pointer for other types).
 
 ---
+## Project structure
+|File |Description|
+| --- | --- |
+| `main.c` | Entry point of the interpreter |
+| `globals.h` | Global variables, tokens, VM instructions, and data structures |
+| `parser.h` | Recursive-descent parser for C code |
+| `token.h` | Tokenizer implementation |
+| `virtual.h` | Code for the stack-based VM operation as defined in `operations.h`|
+| `operations.h` | Bytecode operations and their implementations |
 
-## 🛠️ Supported Types
+
+---
+
+##  Supported Types
 -	**None Type**:Default type  
--**Integer Type**:Stores integer values  
--**String Type**:Stores string value  
--**List Type**:Represents lists  
--**Pointer Type**:Stores memory addresses  
--**Function Type**:Represents functions  
+- **Integer Type**:Stores integer values  
+- **String Type**:Stores string value  
+- **List Type**:Represents lists  
+- **Pointer Type**:Stores memory addresses  
+- **Function Type**:Represents functions  
 For more details, see `globals.h`.
 
 ---
