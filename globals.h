@@ -22,8 +22,7 @@ char *data;
 // registers
 long *pc, cycles;
 
-// VM instructions
-// enum {IMM, LI, LC, SI, SC, PUSH, JMP, CALL, ENT, ADJ, LEV, LEA, OR, XOR, AND, EQ, NE, LT, LE, GT, GE, SHL, SHR, ADD, SUB, MUL, DIV, MOD, EXIT, OPEN, READ, CLOSE, PRTF, MALC, MSET, MCMP};
+// instructions
 
 enum { LEA ,IMM ,JMP ,CALL,JZ  ,JNZ ,ENT ,ADJ ,LEV, RET ,LI  ,LC  ,SI  ,SC ,SET,GET,PUSH, GETELEM, SETELEM, ADDELEM,
        OR  ,XOR ,AND ,EQ  ,NE  ,LT  ,GT  ,LE  ,GE  ,SHL ,SHR ,ADD ,SUB ,MUL ,DIV ,MOD ,
@@ -106,10 +105,6 @@ st* addsym()
 {
   st* temp=(st*)malloc(sizeof(st));
   memset(temp,0,sizeof(st));
-  // if (head == NULL)
-  //   head=temp;
-  // else
-  //   head->next=temp;
   return temp;
 }
 
@@ -184,8 +179,7 @@ void disas(long start)
     char *a[]={"LEA ","IMM ","JMP ","CALL","JZ  ","JNZ ","ENT ","ADJ ","LEV ","LI  ","LC  ","SI  ","SC ","SET","GET", "PUSH","GETELEM", "SETELEM",
            "OR  ","XOR ","AND ","EQ  ","NE  ","LT  ","GT  ","LE  ","GE  ","SHL ","SHR ","ADD ","SUB ","MUL ","DIV ","MOD ",
            "OPEN","READ","CLOSE","PRTF","MALC","MSET","MCMP","EXIT"};
-    // printf("%ld: %.*s\n",line,(int)(src-old_src),old_src);
-    // old_src = src;
+    
     while(old_text<=text)
     {
 

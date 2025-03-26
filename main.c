@@ -20,7 +20,7 @@ void initialise(int argc, char const *argv[])
   argc--;
   argv++;
   poolsize=1024;
-  scope = &symtab;
+  scope = &symtab; // symbol table 
 
   if (argc == 1)
   {
