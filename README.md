@@ -42,15 +42,43 @@ typedef struct val {
 
 ---
 ## Project structure
-|File |Description|
-| --- | --- |
-| `main.c` | Entry point of the interpreter |
-| `globals.h` | Global variables, tokens, VM instructions, and data structures |
-| `parser.h` | Recursive-descent parser for C code |
-| `token.h` | Tokenizer implementation |
-| `virtual.h` | Code for the stack-based VM operation as defined in `operations.h`|
-| `operations.h` | Bytecode operations and their implementations |
+|File | Role |Description|
+| --- | --- | --- |
+| `main.c` | - | Entry point of the interpreter |
+| `globals.h` | **Global Definition** | Global variables, tokens, VM instructions, and data structures |
+| `parser.h` |**Syntax Analysis** | Recursive-descent parser for C code |
+| `token.h` |**Lexical Analysis** | Tokenizer implementation |
+| `virtual.h` | **Execution**  | Code for the stack-based VM operation as defined in `operations.h`|
+| `operations.h` |  - | Bytecode operations and their implementations |
+---
 
+## Grammar Rules
+
+1️⃣ **Tokenizer** (`token.h`)
+- Responsible for breaking the source code into tokens.
+
+- Defines keywords (like if, while, func), operators, and identifiers.
+
+- Converts raw text into tokens that the parser can process.
+
+2️⃣ **Parser** (`parser.h`)
+- Implements Recursive Descent Parsing based on the grammar rules.
+
+- Converts tokens into an Symbol Table (Symtab).
+
+- Contains functions like  if(token == Brak) , if (token == '(')) etc.
+
+3️⃣ **Virtual Machine** (`virtual.h`)
+- Executes the parsed bytecode (compiled from grammar rules -c4).
+
+- Handles function calls, loops, expressions, and stack operations.
+
+4️⃣ **Global Definitions** (`globals.h`)
+- Defines data structures used across all components (e.g., val struct).
+
+- Contains opcodes that represent grammar rule implementations at the bytecode level.
+
+- Stores global variables and instruction sets.
 
 ---
 
